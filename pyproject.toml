@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "emoji-log-ds"
+description = 'emoji log data sci'
+readme = "README.md"
+requires-python = ">=3.7"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Ben", email = "nutchanon@codustry.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+dynamic = ["version"]
+
+[project.urls]
+Documentation = "https://github.com/unknown/emoji-log-ds#readme"
+Issues = "https://github.com/unknown/emoji-log-ds/issues"
+Source = "https://github.com/unknown/emoji-log-ds"
+
+[tool.hatch.version]
+path = "emoji_log_ds/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+[tool.hatch.build.targets.wheel]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "ipykernel",
+  "jupyterlab",
+  "PyGithub",
+  "pytest",
+  "pytest-cov",
+]
+[tool.hatch.envs.default.scripts]
+
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=emoji_log_ds --cov=tests"
+no-cov = "cov --no-cov"
+jupyterx = "jupyter lab"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["37", "38", "39", "310"]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+  "emoji_log_ds/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
